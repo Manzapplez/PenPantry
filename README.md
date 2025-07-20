@@ -25,3 +25,5 @@ En esta versión de Angular ya no se agrega la notación "component" al generar 
       },
   ...
 ```
+##
+El trabajo entregado es el seguimiento del proyecto desde las clases grabadas + filminas. Quería entregar algo más elaborado (otro concepto) pero creo que tuve varios errores que debería solucionar planeando más la arquitectura del programa (relaciones entre componentes) a tiempo. Gracias a todos los profes por hacer posible este Seminario :)
