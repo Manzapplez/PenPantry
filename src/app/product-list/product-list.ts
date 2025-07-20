@@ -20,6 +20,12 @@ export class ProductList implements OnInit {
   ngOnInit(): void {
     this.products = this.productService.getProducts();
   }
+  /* PARA EL API
+    ngOnInit(): void {
+    this.productService.getProducts().subscribe(products => {
+      this.products = products;
+    });
+  } */
 
   addToCart(product: Product): void {
     if (product.quantity <= 0) {
