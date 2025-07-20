@@ -1,12 +1,16 @@
+nav,
+footer {
+    color: white;
+    background-color: hsl(254, 83%, 16%);
+}
+
 nav {
-    background-color: hsla(254, 100%, 50%, 0.5);
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 footer {
-    background-color: hsla(254, 100%, 50%, 0.5);
     text-align: center;
 }
 

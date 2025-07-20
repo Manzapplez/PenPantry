@@ -3,4 +3,5 @@ export interface Product {
     brand: string;
     price: number;
     stock: number;
+    quantity: number;
 }
