@@ -1,0 +1,26 @@
+nav {
+    background-color: hsla(254, 100%, 50%, 0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer {
+    background-color: hsla(254, 100%, 50%, 0.5);
+    text-align: center;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+}
+
+nav a {
+    padding: 1em;
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    background: hsla(0, 0%, 100%, 0.5);
+}

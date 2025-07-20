@@ -1,0 +1,22 @@
+<table>
+    <p>product-list works!</p>
+    <thead></thead>
+    <tbody>
+        @for (product of products; track product.name) {
+        <tr>
+            <!-- <td><img [src]="product.image" [alt]="product.name" /></td> -->
+            <td>{{product.name}}</td>
+            <td>{{product.brand}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.stock}}</td>
+            @if (product.stock == 0) {
+            <td>SIN STOCK</td>
+            }
+        </tr>
+        } @empty {
+        <tr>
+            <td>Espera que le mando un wsp a Bic</td>
+        </tr>
+        }
+    </tbody>
+</table>
