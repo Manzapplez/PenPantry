@@ -37,6 +37,10 @@ export class ProductList implements OnInit {
 
   constructor(private productCartService: ProductCartService, private cartService: CartService) { }
 
+  maxReached(m: string) {
+    alert(m);
+  }
+
   ngOnInit(): void {
     this.productCartService = new ProductCartService();
   }
@@ -45,6 +49,8 @@ export class ProductList implements OnInit {
     if (!product.quantity || product.quantity < 1)
       alert("Lapiceran't");
     return;
+
+    // this.cartService.addToCart(product);
     // editando
   }
 

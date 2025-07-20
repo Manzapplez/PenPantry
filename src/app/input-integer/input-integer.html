@@ -1,0 +1,7 @@
+<td>
+    <button (click)="downQuantity()">—</button>
+
+    <input type="number" [(ngModel)]="quantity" (keyup)="changeQuantity($event)">
+
+    <button (click)="upQuantity()">+</button>
+</td>
