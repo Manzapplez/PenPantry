@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from './Product';
+import { ProductCartService } from '../product-cart.service';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -8,7 +10,7 @@ import { Product } from './Product';
   styleUrl: './product-list.scss'
 })
 
-export class ProductList { //implements OnInit?
+export class ProductList implements OnInit {
   products: Product[] = [ // MOCK DATA
     {
       name: "nombre producto",
@@ -33,28 +35,17 @@ export class ProductList { //implements OnInit?
     }
   ];
 
-  constructor() { }
-  ngOnInit(): void { }
+  constructor(private productCartService: ProductCartService, private cartService: CartService) { }
 
-  // UNSURE
-  downQuantity(product: Product) {
-    if (product.quantity > 0)
-      product.quantity--
+  ngOnInit(): void {
+    this.productCartService = new ProductCartService();
   }
 
-  upQuantity(product: Product) {
-    if (product.quantity < product.stock)
-      product.quantity++
+  addToCart(product: Product) {
+    if (!product.quantity || product.quantity < 1)
+      alert("Lapiceran't");
+    return;
+    // editando
   }
 
-  /*
-  addToCart(product : Product) {
-  if (!product.quantity || product.quantity < 1)
-    alert("Lapiceran't");
-  return;
-  }
-
-  this.cartService.addToCart(product)
-   product.quantity = 0;
-  */
 }
