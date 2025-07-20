@@ -7,9 +7,9 @@ import { App } from './app';
 import { ProductList } from './product-list/product-list';
 import { Cart } from './cart/cart';
 import { About } from './about/about';
+import { Store } from './store/store';
 
 import { FormsModule } from '@angular/forms';
-import { Store } from './store/store';
 
 @NgModule({
   declarations: [
