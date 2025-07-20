@@ -9,10 +9,9 @@
     <tbody>
         @for (product of products; track product.name) {
         <tr>
-            <!-- <td><img [src]="product.image" [alt]="product.name" /></td> -->
             <td>{{product.name}}</td>
             <td>{{product.brand}}</td>
-            <td>{{product.price | currency}}</td>
+            <td>{{product.price}}</td>
 
             @if (product.stock) {
             <td>{{product.stock}}</td>

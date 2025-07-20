@@ -1,25 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Product } from './product-list/Product';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { ProductService } from './product.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductCartService {
+  private cart: Product[] = [];
+  private cartSubject = new BehaviorSubject<Product[]>([]);
 
-  /*
-    Agregar AL SERVICIO
-    una LISTA DE PRODUCTOS
-    y function AGREGAR al CARRITO
-  
-    private _items: Product[] = [];
-    private _itemsSubject: BehaviorSubject<Product[]>  new BehaviorSubject(this._items);
-    public items: Observable<Product[]> = this._itemSubject.asObservable();
-    
-    addToCart(product : Product){}
-    
-    Cuando un objeto observable cambia, emite un evento que otros escuchan
-    Agrego un producto a la product-list, cart escucha y actualiza
-    Servicio tiene una lista de items observable y desde el carrito me suscribo para tener la info actualizada
-  */
+  constructor(private productService: ProductService) { }
+
+  addToCart(product: Product): void {
+    const existing = this.cart.find(p => p.name === product.name);
+    if (existing) {
+      existing.quantity += product.quantity;
+    } else {
+      this.cart.push({ ...product });
+    }
+    this.cartSubject.next(this.cart);
+  }
+
+  getCart() {
+    return this.cartSubject.asObservable();
+  }
+
+  removeOneFromCart(productName: string): void {
+    const item = this.cart.find(p => p.name === productName);
+    if (!item) return;
+
+    item.quantity--;
+
+    this.productService.increaseStock(productName, 1);
+
+    if (item.quantity <= 0) {
+      this.cart = this.cart.filter(p => p.name !== productName);
+    }
+
+    this.cartSubject.next(this.cart);
+  }
 }

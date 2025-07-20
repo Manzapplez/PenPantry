@@ -1,15 +1,30 @@
-<div>
-    <p>cart works!</p>
-    <ul>
-        <!-- @for (product of products | async; track product.name) {
-        <li> {{ product.name }} </li>
-        <li>{{ product.quantity }} </li>
-        
-        <button class="remove"
-        (click)="removeOneFromCart(product.name)"
-        [disabled]="product.quantity <= 0">
-            ➖
-        </button>
-        } -->
-    </ul>
+<h3>Carrito de Compras</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Lapicera</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (product of products ; track product.name) {
+        <tr>
+            <td>{{product.name}}</td>
+            <td>{{product.quantity}}
+                <button (click)="removeOneFromCart(product.name)" [disabled]="product.quantity <= 0">
+                    ➖
+                </button>
+            </td>
+            <td>{{product.price | currency:'ARS'}}</td>
+
+        </tr>
+        }
+    </tbody>
+</table>
+
+<p class="text-end">Total {{total() | currency:'ARS'}}</p>
+<div class="text-end">
+    <button>Comprar</button>
 </div>

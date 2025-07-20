@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from './Product';
 import { ProductCartService } from '../product-cart.service';
-import { CartService } from '../cart.service';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -11,47 +11,33 @@ import { CartService } from '../cart.service';
 })
 
 export class ProductList implements OnInit {
-  products: Product[] = [ // MOCK DATA
-    {
-      name: "nombre producto",
-      brand: "marca producto",
-      price: 1000,
-      stock: 2,
-      quantity: 0,
-    },
-    {
-      name: "nombre 2",
-      brand: "marca 2",
-      price: 1000,
-      stock: 3,
-      quantity: 0,
-    },
-    {
-      name: "nombre 3",
-      brand: "marca",
-      price: 1000,
-      stock: 0,
-      quantity: 0,
-    }
-  ];
+  products: Product[] = [];
 
-  constructor(private productCartService: ProductCartService, private cartService: CartService) { }
-
-  maxReached(m: string) {
-    alert(m);
-  }
+  constructor(
+    private cart: ProductCartService,
+    private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.productCartService = new ProductCartService();
+    this.products = this.productService.getProducts();
   }
 
-  addToCart(product: Product) {
-    if (!product.quantity || product.quantity < 1)
+  addToCart(product: Product): void {
+    if (product.quantity <= 0) {
       alert("Lapiceran't");
-    return;
+      return;
+    }
 
-    // this.cartService.addToCart(product);
-    // editando
+    if (product.quantity > product.stock) {
+      alert('No hay suficiente stock.');
+      return;
+    }
+
+    this.cart.addToCart(product);
+    product.stock -= product.quantity;
+    product.quantity = 0;
   }
 
+  maxReached(msg: string) {
+    alert(msg);
+  }
 }
